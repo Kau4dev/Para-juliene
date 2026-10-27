@@ -48,6 +48,16 @@
   padding: 0;
 }
 
+button {
+  -webkit-tap-highlight-color: transparent;
+  user-select: none;
+  -webkit-user-select: none;
+}
+
+button:focus:not(:focus-visible) {
+  outline: none;
+}
+
 html {
   scroll-behavior: smooth;
   font-size: 16px;
@@ -781,12 +791,14 @@ body {
   display: flex;
   align-items: center;
   justify-content: center;
-  transition: all var(--transition-fast);
+  transition: transform 0.15s ease, color 0.15s ease, background-color 0.15s ease;
+  touch-action: manipulation;
+  -webkit-tap-highlight-color: transparent;
+  outline: none;
 }
 
-.control-btn:hover {
-  color: #fff;
-  transform: scale(1.1);
+.control-btn:active {
+  transform: scale(0.92);
 }
 
 .play-circle-btn {
@@ -800,16 +812,18 @@ body {
   align-items: center;
   justify-content: center;
   flex-shrink: 0;
+  touch-action: manipulation;
+  -webkit-tap-highlight-color: transparent;
+  outline: none;
+  transition: transform 0.15s ease, background-color 0.15s ease, box-shadow 0.15s ease;
 }
 
-.play-circle-btn:hover {
-  background: var(--spotify-green-hover);
-  color: #000;
-  transform: scale(1.08);
+.play-circle-btn:active {
+  transform: scale(0.92);
 }
 
 .play-circle-btn .play-svg {
-  margin-left: 3px; /* Optical center alignment of the play triangle */
+  margin-left: 0;
 }
 
 .secondary-btn {
@@ -817,11 +831,32 @@ body {
   width: 40px;
   height: 40px;
   border-radius: 50%;
+  touch-action: manipulation;
+  -webkit-tap-highlight-color: transparent;
+  outline: none;
 }
 
-.secondary-btn:hover {
-  color: #fff;
-  background: rgba(255, 255, 255, 0.08);
+.secondary-btn:active {
+  transform: scale(0.92);
+}
+
+/* Efeito hover apenas em dispositivos com mouse/cursor fino (evita ficar 'preso' em celulares) */
+@media (hover: hover) and (pointer: fine) {
+  .control-btn:hover {
+    color: #fff;
+    transform: scale(1.08);
+  }
+
+  .play-circle-btn:hover {
+    background: var(--spotify-green-hover);
+    color: #000;
+    transform: scale(1.06);
+  }
+
+  .secondary-btn:hover {
+    color: #fff;
+    background: rgba(255, 255, 255, 0.08);
+  }
 }
 
 .track-quote {
@@ -995,10 +1030,18 @@ body {
   display: block;
 }
 
-/* CORREÇÃO ESPECÍFICA PARA A FOTO 12: Foco no rosto */
+/* CORREÇÕES DE FOCO NO ROSTO PARA FOTOS VERTICAIS */
 .polaroid-img.focus-face-12,
 .polaroid-img[src*="foto_12.jpeg"] {
   object-position: center 6% !important;
+}
+
+.polaroid-img[src*="foto_16.jpeg"] {
+  object-position: center 4% !important;
+}
+
+.polaroid-img[src*="foto_18.jpeg"] {
+  object-position: center 4% !important;
 }
 
 .polaroid-caption {
@@ -1027,13 +1070,22 @@ body {
   justify-content: center;
   cursor: pointer;
   z-index: 10;
-  transition: all var(--transition-fast);
+  transition: transform 0.15s ease, background-color 0.15s ease, color 0.15s ease;
+  touch-action: manipulation;
+  -webkit-tap-highlight-color: transparent;
+  outline: none;
 }
 
-.carousel-arrow:hover {
-  background: var(--color-gold);
-  color: #000;
-  transform: translateY(-50%) scale(1.1);
+.carousel-arrow:active {
+  transform: translateY(-50%) scale(0.92);
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .carousel-arrow:hover {
+    background: var(--color-gold);
+    color: #000;
+    transform: translateY(-50%) scale(1.08);
+  }
 }
 
 .prev-arrow { left: 8px; }
@@ -1168,15 +1220,24 @@ body {
   border-radius: var(--radius-full);
   cursor: pointer;
   box-shadow: 0 8px 25px rgba(183, 28, 28, 0.5);
-  transition: all var(--transition-fast);
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
   display: inline-flex;
   align-items: center;
   gap: 10px;
+  touch-action: manipulation;
+  -webkit-tap-highlight-color: transparent;
+  outline: none;
 }
 
-.btn-primary:hover {
-  transform: translateY(-3px) scale(1.03);
-  box-shadow: 0 12px 30px rgba(232, 165, 152, 0.6);
+.btn-primary:active {
+  transform: scale(0.95);
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .btn-primary:hover {
+    transform: translateY(-3px) scale(1.03);
+    box-shadow: 0 12px 30px rgba(232, 165, 152, 0.6);
+  }
 }
 
 .btn-heart {

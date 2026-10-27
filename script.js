@@ -31,9 +31,9 @@ const CONFIG = {
     { src: 'assets/fotos/foto_13.jpeg', caption: 'Juntos vencemos desafios e celebramos cada vitória.' },
     { src: 'assets/fotos/foto_14.jpeg', caption: 'Por mais milhares de amanheceres com você.' },
     { src: 'assets/fotos/foto_15.jpeg', caption: 'Amor, lealdade e cumplicidade sem fim.' },
-    { src: 'assets/fotos/foto_16.jpeg', caption: 'Cada segundo ao seu lado é motivo de alegria.' },
+    { src: 'assets/fotos/foto_16.jpeg', caption: 'Cada segundo ao seu lado é motivo de alegria.', position: 'center 4%' },
     { src: 'assets/fotos/foto_17.jpeg', caption: 'O meu beijo e o meu coração são todinhos seus.', position: 'center 10%' },
-    { src: 'assets/fotos/foto_18.jpeg', caption: 'O carinho mais doce que transforma meus dias.' },
+    { src: 'assets/fotos/foto_18.jpeg', caption: 'O carinho mais doce que transforma meus dias.', position: 'center 4%' },
     { src: 'assets/fotos/foto_19.jpeg', caption: 'Vinícius & Juliene: brindando ao nosso amor e ao nosso infinito ∞', position: 'center 15%' }
   ]
 };
@@ -463,6 +463,7 @@ const handlePlayPause = (e) => {
   if (e && e.type === 'touchend') {
     e.preventDefault();
   }
+  if (btnPlayPause) btnPlayPause.blur();
   togglePlayPause();
 };
 
@@ -473,14 +474,22 @@ if (btnPlayPause) {
 
 if (btnBackward) {
   btnBackward.addEventListener('click', () => {
+    btnBackward.blur();
     if (audioElement) audioElement.currentTime = Math.max(0, audioElement.currentTime - 10);
   });
+  btnBackward.addEventListener('touchend', () => {
+    btnBackward.blur();
+  }, { passive: true });
 }
 
 if (btnForward) {
   btnForward.addEventListener('click', () => {
+    btnForward.blur();
     if (audioElement) audioElement.currentTime = Math.min(audioElement.duration || 0, audioElement.currentTime + 10);
   });
+  btnForward.addEventListener('touchend', () => {
+    btnForward.blur();
+  }, { passive: true });
 }
 
 if (audioElement) {
@@ -610,4 +619,11 @@ window.addEventListener('DOMContentLoaded', () => {
     audioElement.playsInline = true;
     audioElement.load();
   }
+
+  // Previne que botões fiquem com estado "pressionado" ou com foco retido em celulares
+  document.querySelectorAll('button').forEach((btn) => {
+    btn.addEventListener('touchend', function () {
+      this.blur();
+    }, { passive: true });
+  });
 });
