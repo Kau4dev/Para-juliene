@@ -7,8 +7,8 @@
 // 1. CONFIGURAÇÕES PERSONALIZÁVEIS
 // ==========================================
 const CONFIG = {
-  // Data de início (28 de Outubro de 2018)
-  startDate: new Date(2018, 9, 28, 0, 0, 0),
+  // Data de início (29 de Outubro de 2018)
+  startDate: new Date(2018, 9, 29, 0, 0, 0),
 
 
   // Intervalo de troca automática das fotos em milissegundos (3500ms = 3,5 segundos)
