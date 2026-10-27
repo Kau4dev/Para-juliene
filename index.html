@@ -1,0 +1,499 @@
+<!doctype html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=5.0"
+    />
+    <meta
+      name="description"
+      content="Carta comemorativa e romântica celebrando 8 anos de amor de Vinícius e Juliene."
+    />
+    <meta property="og:title" content="Para Juliene ❤️ 8 Anos de Nós" />
+    <meta
+      property="og:description"
+      content="O número 8 deitado é o infinito. Uma declaração especial para comemorar nossa história."
+    />
+    <meta property="og:type" content="website" />
+    <meta property="og:image" content="assets/fotos/foto_01.jpeg" />
+    <title>Vinícius & Juliene — 8 Anos de Amor ∞</title>
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400;1,600&family=Montserrat:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Sacramento&display=swap"
+      rel="stylesheet"
+    />
+
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <!-- Background Hearts Canvas -->
+    <canvas id="hearts-canvas"></canvas>
+
+    <!-- Tela Inicial: Envelope Realista com Animação de Abertura -->
+    <div id="envelope-overlay" class="envelope-overlay">
+      <div class="envelope-wrapper">
+        <div class="envelope" id="envelope">
+          <!-- Parte traseira do envelope -->
+          <div class="envelope-back"></div>
+
+          <!-- A Aba Superior que se dobra para trás em 3D -->
+          <div class="envelope-flap" id="envelope-flap"></div>
+
+          <!-- A Carta que desliza de dentro do envelope -->
+          <div class="envelope-letter" id="envelope-letter">
+            <div class="letter-inner">
+              <span class="letter-badge">8 ANOS DE AMOR</span>
+              <p class="letter-to">Para: <em>Juliene</em></p>
+              <p class="letter-from">De: <em>Vinícius</em></p>
+              <div class="letter-seal-mini">❤️ ∞</div>
+            </div>
+          </div>
+
+          <!-- O Bolso frontal do envelope (cobre a base da carta) -->
+          <div class="envelope-pocket"></div>
+
+          <!-- O Selo de Cera Central -->
+          <div
+            class="wax-seal"
+            id="open-envelope-btn"
+            title="Toque no selo para abrir nossa carta"
+          >
+            <span class="seal-icon">❤️</span>
+            <span class="seal-text">8 ANOS</span>
+          </div>
+        </div>
+
+        <p class="envelope-instruction">
+          Toque no selo para abrir nossa carta ✨
+        </p>
+      </div>
+    </div>
+
+    <!-- Conteúdo Principal da Página -->
+    <div id="main-content" class="main-content is-hidden">
+      <!-- Barra Superior / Header -->
+      <header class="romantic-header">
+        <div class="header-badge">
+          Bodas de Barro &bull; Nosso Infinito &infin;
+        </div>
+        <h1 class="header-names">
+          Vinícius <span class="heart-pulse">&hearts;</span> Juliene
+        </h1>
+        <p class="header-subtitle">
+          Comemorando 8 anos de uma linda história a dois
+        </p>
+      </header>
+
+      <!-- Contador de Tempo -->
+      <section class="section-container counter-section">
+        <h2 class="section-title">Nossa Jornada em Tempo Real</h2>
+        <p class="section-desc">Cada segundo ao seu lado fez valer a pena:</p>
+
+        <div class="countdown-grid" id="countdown-grid">
+          <div class="time-card">
+            <span class="time-number" id="time-years">8</span>
+            <span class="time-label">Anos</span>
+          </div>
+          <div class="time-card">
+            <span class="time-number" id="time-months">0</span>
+            <span class="time-label">Meses</span>
+          </div>
+          <div class="time-card">
+            <span class="time-number" id="time-days">0</span>
+            <span class="time-label">Dias</span>
+          </div>
+          <div class="time-card">
+            <span class="time-number" id="time-hours">00</span>
+            <span class="time-label">Horas</span>
+          </div>
+          <div class="time-card">
+            <span class="time-number" id="time-minutes">00</span>
+            <span class="time-label">Min</span>
+          </div>
+          <div class="time-card">
+            <span class="time-number" id="time-seconds">00</span>
+            <span class="time-label">Seg</span>
+          </div>
+        </div>
+        <p class="counter-footer-quote">
+          "O 8 representa o infinito, exatamente como o amor que sinto por
+          você."
+        </p>
+      </section>
+
+      <!-- Player de Música Nativo Estilo Spotify -->
+      <section class="section-container music-section">
+        <div class="music-card spotify-theme">
+          <div class="spotify-header">
+            <div class="spotify-badge">
+              <svg class="spotify-icon" viewBox="0 0 24 24" fill="currentColor">
+                <path
+                  d="M12 0C5.373 0 0 5.373 0 12s5.373 12 12 12 12-5.373 12-12S18.627 0 12 0zm5.498 17.306c-.216.353-.674.467-1.027.252-2.816-1.721-6.36-2.111-10.536-1.157-.403.093-.804-.158-.897-.562-.093-.404.158-.805.562-.898 4.567-1.043 8.489-.601 11.646 1.338.353.216.467.674.252 1.027zm1.467-3.26c-.272.443-.852.585-1.295.313-3.224-1.982-8.139-2.555-11.95-1.397-.502.152-1.033-.134-1.185-.636-.152-.502.134-1.033.636-1.185 4.359-1.323 9.774-.683 13.481 1.61.443.272.585.852.313 1.295zm.126-3.41c-3.865-2.296-10.239-2.508-13.921-1.39-.592.18-1.222-.158-1.402-.75-.18-.592.158-1.222.75-1.402 4.234-1.285 11.272-1.042 15.719 1.597.533.316.707 1.01.391 1.543-.316.533-1.01.707-1.543.391z"
+                />
+              </svg>
+              <span>Nossa Trilha Sonora</span>
+            </div>
+            <span class="spotify-status-tag">Tocando Agora</span>
+          </div>
+
+          <!-- Player Customizado Local (Estilo Spotify) -->
+          <div id="custom-player-view" class="player-body">
+            <div class="album-art-wrap">
+              <img
+                src="assets/fotos/foto_01.jpeg"
+                alt="Capa da Música"
+                class="album-cover"
+                id="album-cover-img"
+              />
+              <div class="vinyl-disc" id="vinyl-disc"></div>
+            </div>
+
+            <div class="track-details">
+              <div class="track-meta">
+                <span class="track-title" id="track-title">Perfume</span>
+                <span class="track-artist" id="track-artist"
+                  >Belo &bull; Nossa Canção</span
+                >
+              </div>
+
+              <!-- Barra de Progresso Interativa -->
+              <div class="progress-bar-container" id="progress-container">
+                <div class="progress-bar-track">
+                  <div class="progress-bar-fill" id="progress-fill"></div>
+                </div>
+                <div class="time-display">
+                  <span id="current-time">0:00</span>
+                  <span id="total-duration">3:49 </span>
+                </div>
+              </div>
+
+              <!-- Controles do Player (Estilo Spotify Autêntico) -->
+              <div class="player-controls">
+                <button
+                  class="control-btn secondary-btn"
+                  id="btn-backward"
+                  title="Reiniciar / Voltar 10s"
+                  aria-label="Voltar"
+                >
+                  <svg
+                    viewBox="0 0 24 24"
+                    width="24"
+                    height="24"
+                    fill="currentColor"
+                  >
+                    <path d="M6 6h2v12H6zm3.5 6l8.5 6V6z" />
+                  </svg>
+                </button>
+
+                <button
+                  class="control-btn play-circle-btn"
+                  id="btn-play-pause"
+                  title="Tocar / Pausar"
+                  aria-label="Tocar ou Pausar"
+                >
+                  <svg
+                    id="play-icon"
+                    viewBox="0 0 24 24"
+                    width="26"
+                    height="26"
+                    fill="currentColor"
+                    class="play-svg"
+                  >
+                    <path d="M8 5.14v14l11-7-11-7z" />
+                  </svg>
+                  <svg
+                    id="pause-icon"
+                    class="is-hidden pause-svg"
+                    viewBox="0 0 24 24"
+                    width="26"
+                    height="26"
+                    fill="currentColor"
+                  >
+                    <path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z" />
+                  </svg>
+                </button>
+
+                <button
+                  class="control-btn secondary-btn"
+                  id="btn-forward"
+                  title="Avançar 10s"
+                  aria-label="Avançar"
+                >
+                  <svg
+                    viewBox="0 0 24 24"
+                    width="24"
+                    height="24"
+                    fill="currentColor"
+                  >
+                    <path d="M6 18l8.5-6L6 6v12zM16 6v12h2V6h-2z" />
+                  </svg>
+                </button>
+              </div>
+
+              <!-- Frase Romântica no Rodapé do Player -->
+              <p class="track-quote" id="track-quote">
+                “Quando menos esperava, o teu perfume estava aqui...” &bull;
+                Para sempre nós dois &infin;
+              </p>
+            </div>
+          </div>
+
+          <!-- Áudio element nativo -->
+          <audio id="audio-element" preload="metadata">
+            <source
+              src="assets/Belo - Perfume (Ao Vivo)(MP3_160K).mp3"
+              type="audio/mpeg"
+            />
+            <source src="assets/musica.mp3" type="audio/mpeg" />
+            <source src="musica.mp3" type="audio/mpeg" />
+            Seu navegador não suporta reprodução de áudio.
+          </audio>
+        </div>
+      </section>
+
+      <!-- A Carta de Amor -->
+      <section class="section-container letter-section">
+        <div class="parchment-card">
+          <div class="corner-ornament top-left"></div>
+          <div class="corner-ornament top-right"></div>
+          <div class="corner-ornament bottom-left"></div>
+          <div class="corner-ornament bottom-right"></div>
+
+          <div class="letter-header">
+            <span class="letter-date">28 de Outubro &bull; Nossos 8 Anos</span>
+            <h2 class="letter-salutation">Minha querida Juliene,</h2>
+          </div>
+
+          <div class="letter-body">
+            <p>
+              Parece que foi ontem que nossas vidas se cruzaram pela primeira
+              vez, mas hoje celebramos <strong>8 anos juntos</strong>. Oito anos
+              que passaram com a rapidez dos momentos felizes e com a solidez de
+              tudo o que foi construído com amor verdadeiro.
+            </p>
+
+            <p>
+              Dizem que o número <strong>8</strong>, quando deitado, forma o
+              símbolo do infinito. E não existe definição mais perfeita para o
+              que sinto por você: um amor que não cabe no calendário, que não se
+              desgasta com o tempo e que só se renova a cada amanhecer.
+            </p>
+
+            <blockquote class="letter-quote">
+              "Quando menos esperava, o teu perfume estava aqui... Espalhado
+              pelo ar, me chamando pra deitar. E a certeza mais linda tomou
+              conta do meu peito: você é o meu lugar favorito no mundo."
+            </blockquote>
+
+            <p>
+              Ao longo desses 8 anos, aprendemos a crescer lado a lado.
+              Compartilhamos sonhos, vencemos dias difíceis, rimos até a barriga
+              doer e construímos uma cumplicidade rara, onde um simples olhar
+              nosso já diz tudo. Em você, eu não encontrei apenas a mulher da
+              minha vida, mas a minha melhor amiga, minha maior parceira e o meu
+              lar.
+            </p>
+
+            <p>
+              Obrigado por cada abraço que curou meus dias cansados, por cada
+              sorriso que iluminou o meu caminho e por me fazer um homem melhor
+              a cada dia. O que vivemos até aqui é precioso demais, mas tenho a
+              certeza no coração de que esses primeiros 8 anos são apenas o
+              prólogo da nossa história.
+            </p>
+
+            <p>
+              Que venham mais 8, 80, uma eternidade ao seu lado. Eu te amo hoje
+              muito mais do que há 8 anos, e amanhã te amarei mais do que hoje.
+            </p>
+
+            <div class="letter-signature">
+              <span class="sig-dedication"
+                >Com todo o meu amor, para sempre seu,</span
+              >
+              <span class="sig-name">Vinícius</span>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Carrossel de Fotos Infinito (15 Fotos da pasta fotos/) -->
+      <section class="section-container carousel-section">
+        <h2 class="section-title">Nossos Melhores Momentos</h2>
+        <p class="section-desc">
+          Uma fração das memórias inesquecíveis que construímos juntos:
+        </p>
+
+        <div class="carousel-wrapper">
+          <button
+            class="carousel-arrow prev-arrow"
+            id="carousel-prev"
+            aria-label="Foto anterior"
+          >
+            <svg viewBox="0 0 24 24" width="28" height="28" fill="currentColor">
+              <path d="M15.41 7.41L14 6l-6 6 6 6 1.41-1.41L10.83 12z" />
+            </svg>
+          </button>
+
+          <div class="carousel-viewport" id="carousel-viewport">
+            <div class="carousel-track" id="carousel-track">
+              <!-- Slides gerados dinamicamente com as fotos e suporte a looping infinito -->
+            </div>
+          </div>
+
+          <button
+            class="carousel-arrow next-arrow"
+            id="carousel-next"
+            aria-label="Próxima foto"
+          >
+            <svg viewBox="0 0 24 24" width="28" height="28" fill="currentColor">
+              <path d="M10 6L8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6z" />
+            </svg>
+          </button>
+        </div>
+
+        <!-- Indicadores de Pontinhos (Dots) -->
+        <div class="carousel-dots" id="carousel-dots"></div>
+
+        <!-- Contador de Slides -->
+        <div class="carousel-counter" id="carousel-counter">Foto 1 de 15</div>
+      </section>
+
+      <!-- 8 Motivos Pelos Quais Eu Te Amo (1 para cada ano) -->
+      <section class="section-container reasons-section">
+        <h2 class="section-title">8 Anos &bull; 8 Motivos Para Te Amar</h2>
+        <p class="section-desc">Toque em cada cartão para revelar o motivo:</p>
+
+        <div class="reasons-grid">
+          <div class="reason-card" tabindex="0">
+            <div class="reason-number">01</div>
+            <div class="reason-content">
+              <h3>Seu Sorriso Único</h3>
+              <p>
+                A luz mais bonita do meu dia, capaz de transformar qualquer
+                momento comum em pura felicidade.
+              </p>
+            </div>
+          </div>
+
+          <div class="reason-card" tabindex="0">
+            <div class="reason-number">02</div>
+            <div class="reason-content">
+              <h3>Nossa Cumplicidade</h3>
+              <p>
+                Saber que com você posso ser exatamente quem eu sou, com toda
+                liberdade e verdade.
+              </p>
+            </div>
+          </div>
+
+          <div class="reason-card" tabindex="0">
+            <div class="reason-number">03</div>
+            <div class="reason-content">
+              <h3>O Seu Abraço</h3>
+              <p>
+                O meu porto seguro, onde todo o cansaço do mundo silencia e a
+                paz toma conta.
+              </p>
+            </div>
+          </div>
+
+          <div class="reason-card" tabindex="0">
+            <div class="reason-number">04</div>
+            <div class="reason-content">
+              <h3>Nossa Parceria Leal</h3>
+              <p>
+                A certeza inabalável de que enfrentamos qualquer tempestade e
+                celebramos qualquer vitória juntos.
+              </p>
+            </div>
+          </div>
+
+          <div class="reason-card" tabindex="0">
+            <div class="reason-number">05</div>
+            <div class="reason-content">
+              <h3>Seu Cuidado & Carinho</h3>
+              <p>
+                O amor genuíno e a sensibilidade que você coloca em cada detalhe
+                da nossa convivência.
+              </p>
+            </div>
+          </div>
+
+          <div class="reason-card" tabindex="0">
+            <div class="reason-number">06</div>
+            <div class="reason-content">
+              <h3>Nossas Risadas Bobas</h3>
+              <p>
+                Aquelas piadas internas e momentos espontâneos de gargalhada que
+                só nós dois compreendemos.
+              </p>
+            </div>
+          </div>
+
+          <div class="reason-card" tabindex="0">
+            <div class="reason-number">07</div>
+            <div class="reason-content">
+              <h3>A Mulher Admirável Que Você É</h3>
+              <p>
+                Sua determinação, força, doçura e sabedoria que me enchem de
+                orgulho constante.
+              </p>
+            </div>
+          </div>
+
+          <div class="reason-card" tabindex="0">
+            <div class="reason-number">08</div>
+            <div class="reason-content">
+              <h3>O Nosso Futuro</h3>
+              <p>
+                Olhar para frente e ter a certeza absoluta de que é ao seu lado
+                que quero construir toda a minha vida.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Botão de Surpresa Final & Confetes -->
+      <section class="section-container celebration-section">
+        <div class="celebration-box">
+          <h3>Feliz 8 Anos, Meu Amor!</h3>
+          <p>
+            Que o nosso amor continue sendo fonte de paz, risos e infinitas
+            alegrias.
+          </p>
+          <button id="btn-surprise" class="btn-primary">
+            <span class="btn-heart">&hearts;</span> Clique aqui para uma chuva
+            de amor
+          </button>
+        </div>
+      </section>
+
+      <!-- Rodapé -->
+      <footer class="romantic-footer">
+        <p>
+          Feito com todo o coração por <strong>Vinícius</strong> para
+          <strong>Juliene</strong> &bull; 8 Anos Juntos ∞
+        </p>
+      </footer>
+    </div>
+
+    <!-- Modal Lightbox para foto em tela cheia -->
+    <div id="lightbox-modal" class="lightbox-modal is-hidden">
+      <button class="lightbox-close" id="lightbox-close" aria-label="Fechar">
+        &times;
+      </button>
+      <div class="lightbox-content">
+        <img src="" alt="Foto em destaque" id="lightbox-img" />
+        <p id="lightbox-caption" class="lightbox-caption"></p>
+      </div>
+    </div>
+
+    <script src="script.js"></script>
+  </body>
+</html>
