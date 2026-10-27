@@ -6,6 +6,8 @@
       name="viewport"
       content="width=device-width, initial-scale=1.0, maximum-scale=5.0"
     />
+    <meta name="theme-color" content="#0d0814" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
     <meta
       name="description"
       content="Carta comemorativa e romântica celebrando 8 anos de amor de Vinícius e Juliene."
@@ -127,7 +129,7 @@
 
       <!-- Player de Música Nativo Estilo Spotify -->
       <section class="section-container music-section">
-        <div class="music-card spotify-theme">
+        <div class="music-card spotify-theme" id="spotify-card">
           <div class="spotify-header">
             <div class="spotify-badge">
               <svg class="spotify-icon" viewBox="0 0 24 24" fill="currentColor">
@@ -135,9 +137,20 @@
                   d="M12 0C5.373 0 0 5.373 0 12s5.373 12 12 12 12-5.373 12-12S18.627 0 12 0zm5.498 17.306c-.216.353-.674.467-1.027.252-2.816-1.721-6.36-2.111-10.536-1.157-.403.093-.804-.158-.897-.562-.093-.404.158-.805.562-.898 4.567-1.043 8.489-.601 11.646 1.338.353.216.467.674.252 1.027zm1.467-3.26c-.272.443-.852.585-1.295.313-3.224-1.982-8.139-2.555-11.95-1.397-.502.152-1.033-.134-1.185-.636-.152-.502.134-1.033.636-1.185 4.359-1.323 9.774-.683 13.481 1.61.443.272.585.852.313 1.295zm.126-3.41c-3.865-2.296-10.239-2.508-13.921-1.39-.592.18-1.222-.158-1.402-.75-.18-.592.158-1.222.75-1.402 4.234-1.285 11.272-1.042 15.719 1.597.533.316.707 1.01.391 1.543-.316.533-1.01.707-1.543.391z"
                 />
               </svg>
-              <span>Nossa Trilha Sonora</span>
+              <span class="badge-title-full">Nossa Trilha Sonora</span>
+              <span class="badge-title-short">Nossa Trilha</span>
             </div>
-            <span class="spotify-status-tag">Tocando Agora</span>
+
+            <!-- Cápsula de Status Glassmorphism com Equalizador Animado -->
+            <div class="spotify-status-tag" id="music-status-tag">
+              <span class="status-equalizer" aria-hidden="true">
+                <span class="eq-bar bar-1"></span>
+                <span class="eq-bar bar-2"></span>
+                <span class="eq-bar bar-3"></span>
+              </span>
+              <span class="status-text status-text-full" id="music-status-text-full">Tocando Agora</span>
+              <span class="status-text status-text-short" id="music-status-text-short">Tocando</span>
+            </div>
           </div>
 
           <!-- Player Customizado Local (Estilo Spotify) -->
@@ -242,14 +255,15 @@
             </div>
           </div>
 
-          <!-- Áudio element nativo -->
-          <audio id="audio-element" preload="metadata">
-            <source
-              src="assets/Belo - Perfume (Ao Vivo)(MP3_160K).mp3"
-              type="audio/mpeg"
-            />
+          <!-- Áudio element nativo otimizado para iOS / Safari / Chrome -->
+          <audio
+            id="audio-element"
+            src="assets/musica.mp3"
+            preload="auto"
+            playsinline
+            webkit-playsinline
+          >
             <source src="assets/musica.mp3" type="audio/mpeg" />
-            <source src="musica.mp3" type="audio/mpeg" />
             Seu navegador não suporta reprodução de áudio.
           </audio>
         </div>
@@ -321,7 +335,7 @@
         </div>
       </section>
 
-      <!-- Carrossel de Fotos Infinito (15 Fotos da pasta fotos/) -->
+      <!-- Carrossel de Fotos Infinito (19 Fotos da pasta fotos/) -->
       <section class="section-container carousel-section">
         <h2 class="section-title">Nossos Melhores Momentos</h2>
         <p class="section-desc">
@@ -360,7 +374,7 @@
         <div class="carousel-dots" id="carousel-dots"></div>
 
         <!-- Contador de Slides -->
-        <div class="carousel-counter" id="carousel-counter">Foto 1 de 15</div>
+        <div class="carousel-counter" id="carousel-counter">Foto 1 de 19</div>
       </section>
 
       <!-- 8 Motivos Pelos Quais Eu Te Amo (1 para cada ano) -->

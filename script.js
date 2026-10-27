@@ -14,7 +14,7 @@ const CONFIG = {
   // Intervalo de troca automática das fotos em milissegundos (3500ms = 3,5 segundos)
   carouselInterval: 3500,
   
-  // Lista unificada com as 15 fotos da pasta assets/fotos/
+  // Lista unificada com as 19 fotos da pasta assets/fotos/
   photos: [
     { src: 'assets/fotos/foto_01.jpeg', caption: 'O início de tudo e a certeza do para sempre.' },
     { src: 'assets/fotos/foto_02.jpeg', caption: 'O seu sorriso é o meu lugar favorito.' },
@@ -26,12 +26,15 @@ const CONFIG = {
     { src: 'assets/fotos/foto_08.jpeg', caption: 'Seu abraço cura tudo e me traz a maior paz.' },
     { src: 'assets/fotos/foto_09.jpeg', caption: 'Minha melhor amiga, meu grande amor.' },
     { src: 'assets/fotos/foto_10.jpeg', caption: 'A beleza de sonhar e construir uma vida a dois.' },
-    { src: 'assets/fotos/foto_11.jpeg', caption: 'Amor, lealdade e admiração sem fim.' },
-    // Foto 12 com foco calibrado no rosto
+    { src: 'assets/fotos/foto_11.jpeg', caption: 'O casal mais lindo e apaixonado desse mundo.', position: 'center 8%' },
     { src: 'assets/fotos/foto_12.jpeg', caption: 'A felicidade estampada em nossos olhares.', position: 'center 6%', isFocusFace: true },
     { src: 'assets/fotos/foto_13.jpeg', caption: 'Juntos vencemos desafios e celebramos cada vitória.' },
     { src: 'assets/fotos/foto_14.jpeg', caption: 'Por mais milhares de amanheceres com você.' },
-    { src: 'assets/fotos/foto_15.jpeg', caption: 'Vinícius & Juliene: para todo o sempre ∞' }
+    { src: 'assets/fotos/foto_15.jpeg', caption: 'Amor, lealdade e cumplicidade sem fim.' },
+    { src: 'assets/fotos/foto_16.jpeg', caption: 'Cada segundo ao seu lado é motivo de alegria.' },
+    { src: 'assets/fotos/foto_17.jpeg', caption: 'O meu beijo e o meu coração são todinhos seus.', position: 'center 10%' },
+    { src: 'assets/fotos/foto_18.jpeg', caption: 'O carinho mais doce que transforma meus dias.' },
+    { src: 'assets/fotos/foto_19.jpeg', caption: 'Vinícius & Juliene: brindando ao nosso amor e ao nosso infinito ∞', position: 'center 15%' }
   ]
 };
 
@@ -45,15 +48,36 @@ const mainContent = document.getElementById('main-content');
 
 let isEnvelopeOpening = false;
 
-function openEnvelope() {
+function unlockAudio() {
+  if (!audioElement) return;
+  audioElement.playsInline = true;
+  if (!audioElement.src || audioElement.src === '' || audioElement.src.endsWith('/')) {
+    audioElement.src = 'assets/musica.mp3';
+  }
+  const playPromise = audioElement.play();
+  if (playPromise !== undefined) {
+    playPromise
+      .then(() => {
+        isPlaying = true;
+        updatePlayerUI();
+      })
+      .catch((err) => {
+        console.warn('iOS Autoplay check:', err);
+        isPlaying = false;
+        updatePlayerUI();
+      });
+  }
+}
+
+function openEnvelope(e) {
   if (isEnvelopeOpening) return;
   isEnvelopeOpening = true;
 
-  // 1. Inicia movimento da aba e quebra do selo
-  envelope.classList.add('is-opening');
+  // 1. Dispara a reprodução de áudio diretamente no gesto do usuário (vital para iOS/Safari/Chrome)
+  unlockAudio();
 
-  // 2. Dispara a reprodução de áudio após interação do usuário
-  playAudio();
+  // 2. Inicia movimento da aba e quebra do selo
+  envelope.classList.add('is-opening');
 
   // 3. Chuva de corações comemorativa durante a abertura
   triggerLoveShower(50);
@@ -76,15 +100,28 @@ function openEnvelope() {
   }, 1700);
 }
 
+const handleEnvelopeOpen = (e) => {
+  if (e && e.type === 'touchend') {
+    e.preventDefault();
+  }
+  openEnvelope(e);
+};
+
 if (openEnvelopeBtn) {
-  openEnvelopeBtn.addEventListener('click', (e) => {
-    e.stopPropagation();
-    openEnvelope();
-  });
+  openEnvelopeBtn.addEventListener('click', handleEnvelopeOpen);
+  openEnvelopeBtn.addEventListener('touchend', handleEnvelopeOpen, { passive: false });
 }
 if (envelope) {
-  envelope.addEventListener('click', openEnvelope);
+  envelope.addEventListener('click', handleEnvelopeOpen);
+  envelope.addEventListener('touchend', handleEnvelopeOpen, { passive: false });
 }
+
+// Fallback para iOS: se o navegador bloqueou o áudio na abertura, o próximo toque em qualquer lugar da tela desbloqueia
+document.addEventListener('touchend', function unlockOnFirstTouch() {
+  if (audioElement && audioElement.paused && isEnvelopeOpening) {
+    unlockAudio();
+  }
+}, { once: true, passive: true });
 
 // ==========================================
 // 3. CONTADOR DE TEMPO EM TEMPO REAL
@@ -366,6 +403,9 @@ const btnPlayPause = document.getElementById('btn-play-pause');
 const playIcon = document.getElementById('play-icon');
 const pauseIcon = document.getElementById('pause-icon');
 const playerBody = document.getElementById('custom-player-view');
+const spotifyCard = document.getElementById('spotify-card');
+const statusTextFull = document.getElementById('music-status-text-full');
+const statusTextShort = document.getElementById('music-status-text-short');
 const progressContainer = document.getElementById('progress-container');
 const progressFill = document.getElementById('progress-fill');
 const currentTimeEl = document.getElementById('current-time');
@@ -376,20 +416,7 @@ const btnForward = document.getElementById('btn-forward');
 let isPlaying = false;
 
 function playAudio() {
-  if (!audioElement) return;
-  const playPromise = audioElement.play();
-  if (playPromise !== undefined) {
-    playPromise
-      .then(() => {
-        isPlaying = true;
-        updatePlayerUI();
-      })
-      .catch(() => {
-        // Bloqueio ou arquivo ainda não adicionado
-        isPlaying = false;
-        updatePlayerUI();
-      });
-  }
+  unlockAudio();
 }
 
 function pauseAudio() {
@@ -412,10 +439,16 @@ function updatePlayerUI() {
     playIcon.classList.add('is-hidden');
     pauseIcon.classList.remove('is-hidden');
     playerBody.classList.add('playing');
+    if (spotifyCard) spotifyCard.classList.add('playing');
+    if (statusTextFull) statusTextFull.textContent = 'Tocando Agora';
+    if (statusTextShort) statusTextShort.textContent = 'Tocando';
   } else {
     playIcon.classList.remove('is-hidden');
     pauseIcon.classList.add('is-hidden');
     playerBody.classList.remove('playing');
+    if (spotifyCard) spotifyCard.classList.remove('playing');
+    if (statusTextFull) statusTextFull.textContent = 'Pausado';
+    if (statusTextShort) statusTextShort.textContent = 'Pausado';
   }
 }
 
@@ -426,7 +459,17 @@ function formatTime(seconds) {
   return `${mins}:${secs < 10 ? '0' : ''}${secs}`;
 }
 
-if (btnPlayPause) btnPlayPause.addEventListener('click', togglePlayPause);
+const handlePlayPause = (e) => {
+  if (e && e.type === 'touchend') {
+    e.preventDefault();
+  }
+  togglePlayPause();
+};
+
+if (btnPlayPause) {
+  btnPlayPause.addEventListener('click', handlePlayPause);
+  btnPlayPause.addEventListener('touchend', handlePlayPause, { passive: false });
+}
 
 if (btnBackward) {
   btnBackward.addEventListener('click', () => {
@@ -560,7 +603,11 @@ if (btnSurprise) {
   });
 }
 
-// Inicializa o carrossel no carregamento da página
+// Inicializa o carrossel e o pré-carregamento de áudio para dispositivos móveis
 window.addEventListener('DOMContentLoaded', () => {
   initCarousel();
+  if (audioElement) {
+    audioElement.playsInline = true;
+    audioElement.load();
+  }
 });

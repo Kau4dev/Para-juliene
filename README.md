@@ -12,30 +12,31 @@ Página web comemorativa, interativa e romântica para celebrar os **8 anos junt
 ├── style.css            # Estilos românticos, animação do envelope e responsividade
 ├── script.js            # Lógica do envelope, contador, carrossel infinito e player
 ├── assets/
-│   ├── fotos/           # As 15 fotos (foto_01.jpeg até foto_15.jpeg)
+│   ├── fotos/           # As 19 fotos (foto_01.jpeg até foto_19.jpeg)
 │   │   ├── foto_01.jpeg
 │   │   ├── ...
-│   │   ├── foto_12.jpeg # Foco calibrado nos rostos
-│   │   └── foto_15.jpeg
-│   ├── musica.mp3       # Áudio da música "Perfume - Belo"
-│   └── Belo - Perfume (Ao Vivo)(MP3_160K).mp3
+│   │   ├── foto_11.jpeg # Vestido vermelho & camisa preta
+│   │   ├── foto_12.jpeg # Foco calibrado nos rostos (roupa branca)
+│   │   └── foto_19.jpeg # Brinde do casal
+│   └── musica.mp3       # Áudio da música "Perfume - Belo"
 └── README.md            # Este guia de uso e publicação
 ```
 
 ---
 
-## 🎵 Música Configurada
+## 🎵 Música Otimizada para iPhone (iOS Safari & Chrome)
 
-A música **"Perfume - Belo"** já está incluída e configurada no player nativo estilo **Spotify**.
+O player agora está 100% configurado para funcionar em qualquer dispositivo móvel, incluindo iPhones no Safari e Chrome.
 Quando Juliene tocar no selo para abrir a carta, a música iniciará automaticamente!
 
 ---
 
 ## 🖼️ Ajustes nas Fotos e Carrossel
 
-- **Pasta única:** Todas as 15 fotos estão reunidas em `fotos/` (`foto_01.jpeg` até `foto_15.jpeg`).
-- **Foco do rosto na foto 12:** Calibrado especificamente com `object-position: center 6%` para manter os rostos perfeitamente visíveis e em destaque.
-- **Carrossel Infinito:** Ao chegar na última foto (15), o carrossel continua avançando suavemente para a foto 1 sem rebobinar todas as fotos de volta.
+- **19 fotos organizadas:** Todas as fotos estão reunidas e padronizadas em `assets/fotos/` (`foto_01.jpeg` até `foto_19.jpeg`).
+- **Foco do rosto na foto 12:** Calibrado especificamente com `object-position: center 6%`.
+- **Foco do rosto na foto 11:** Calibrado especificamente com `object-position: center 8%`.
+- **Carrossel Infinito:** Looping suave da foto 19 diretamente para a foto 1.
 
 ---
 
