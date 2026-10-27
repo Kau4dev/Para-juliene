@@ -10,8 +10,9 @@ const CONFIG = {
   // Data de início (28 de Outubro de 2018)
   startDate: new Date(2018, 9, 28, 0, 0, 0),
 
-  // Intervalo de troca automática das fotos em milissegundos (4500ms = 4,5 segundos)
-  carouselInterval: 4500,
+
+  // Intervalo de troca automática das fotos em milissegundos (3500ms = 3,5 segundos)
+  carouselInterval: 3500,
   
   // Lista unificada com as 15 fotos da pasta assets/fotos/
   photos: [
@@ -555,7 +556,7 @@ if (btnSurprise) {
     btnSurprise.innerHTML = '<span class="btn-heart">❤️</span> Te amo infinitamente!';
     setTimeout(() => {
       btnSurprise.innerHTML = '<span class="btn-heart">&hearts;</span> Clique aqui para uma chuva de amor';
-    }, 3500);
+    }, 30000);
   });
 }
 
